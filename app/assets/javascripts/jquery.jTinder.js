@@ -52,10 +52,42 @@
 			$(element).bind('touchend mouseup', this.handler);
 		},
 
+		bindNew: function(element){
+			panes = $(">ul>li", element);
+			pane_count = panes.length;
+			current_pane = panes.length - 1;
+		},
+
 		showPane: function (index) {
 			panes.eq(current_pane).hide();
 			current_pane = index;
 		},
+
+		// Added
+		var li_count = $("#tinderslide > ul > li").length;
+
+		if (li_count == 5) {
+			var last_id = $("#tinderslide > ul > li").first().attr("id")
+			$.ajax({
+				type: "GET",
+				url: "/users",
+				data: {
+					id: last_id
+				},
+				dataType: "script",
+				success: function(e){
+				}
+			});
+
+		} else if (li_count == 0 && load_more == true) {
+			$.ajax({
+				type: "GET",
+				url: "/users",
+				dataType: "script",
+				success: function(e) {
+				}
+			});
+		}
 
 		next: function () {
 			return this.showPane(current_pane - 1);
@@ -170,6 +202,9 @@
 			else if ($.isFunction(Plugin.prototype[options])) {
 				$.data(this, 'plugin_' + pluginName)[options]();
 		    }
+		    	else{
+		    		$.data(this, "plugin_" + pluginName).bindNew(this);
+		    	}
 		});
 
 		return this;

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+	default_scope { order('id DESC')}
+
 	has_attached_file :avatar,
 					storage: :s3,
 					styles: { medium: "370x370", thumb: "100x100"},
