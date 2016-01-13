@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       else
         @users = User.all.limit(2)
       end
-      
+
     respond_to do |format|
       format.html
       format.js
@@ -21,5 +21,6 @@ class UsersController < ApplicationController
   end
 
   def matches
+    @matches = current_user.friendships.where(state: "ACTIVE").map(&:friend) + current_user.inverse_friendships.where(state: "ACTIVE").map(&:user)
   end
 end
