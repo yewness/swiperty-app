@@ -27,6 +27,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 # Image upload
 gem 'paperclip'
 gem 'aws-sdk', '~> 2'
+gem 'simple_form'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
