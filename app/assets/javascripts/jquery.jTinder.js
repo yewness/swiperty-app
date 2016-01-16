@@ -61,7 +61,8 @@
 		showPane: function (index) {
 			panes.eq(current_pane).hide();
 			current_pane = index;
-		},
+
+			$(".spinner").show();
 
 		// Added
 		var li_count = $("#tinderslide > ul > li").length;
@@ -85,9 +86,11 @@
 				url: "/users",
 				dataType: "script",
 				success: function(e) {
+					$(".spinner").hide(); // Do something on success!
 				}
 			});
-		}
+			}, 
+		},
 
 		next: function () {
 			return this.showPane(current_pane - 1);

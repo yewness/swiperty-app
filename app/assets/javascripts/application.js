@@ -9,4 +9,6 @@
 //= require jquery.transform2d
 //= require tinysort
 //= require jquery.tinysort
+//= require sweetalert.min
+//= require data-confirm-modal
 //= require_tree .

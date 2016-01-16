@@ -23,6 +23,8 @@ gem 'bootstrap-kaminari-views'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'omniauth-facebook'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'cancancan'
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 # Image upload
 gem 'paperclip'

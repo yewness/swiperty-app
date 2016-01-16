@@ -14,10 +14,16 @@
 
 <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
 	<ul class="nav navmenu-nav">
-		<li class="active"><a href="#"><i class="fa fa-users"></i> Discover</a></li>
-		<li><a href="#"><i class="fa fa-heart"></i> Matches</a></li>
-		<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-		<li><%= link_to '/sign_out', method: :delete do %><i class="fa fa-cog"></i> Log Out <% end %></li>
+		<li class="<%= if params[:action] == "index" then "active" end %> nav-btn">
+			<%= link_to root_path do %><i class="fa fa-users"></i>Discover <% end %>
+		</li>
+		<li class="<%= if params[:action] == "matches" then "active" end %> nav-btn">
+			<%= link_to matches_user_path(current_user) do %><i class="fa fa-heart"></i>bMatches <% end %>
+		</li>
+		<li class="<%= if params[:action] == "edit" then "active" end %> nav-btn">
+			<%= link_to edit_user_path(current_user) do %><i class="fa fa-cog"></i> Settings <% end %>
+		</li>
+		<li class="nav-btn"><%= link_to '/sign_out', method: :delete do %><i class="fa fa-cog"></i> Log Out <% end %></li>
 	</ul>
 </nav>
 
@@ -25,8 +31,13 @@
 	<button type="button" class="navbar-toggle button-nav" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body">
 		<i class="fa fa-cog"></i>
 	</button>
-	<button type="button" class="navbar-toggle pull-right button-nav">
-		<i class="fa fa-heart"></i>
+
+	<%= link_to root_path, class: "navbar-brand" do %>
+		<%= image_tag "logo.png", alt: "Tinstuk logo", class: "logo-brand" %>
+	<% end %>
+
+	<button type="button" class="navbar-toggle pull-right">
+		<%= link_to matches_user_path(current_user) do %><i class="fa fa-heart"></i><% end %>
 	</button>
 </div>
 
@@ -41,11 +52,22 @@
 <%= yield %>
 
 <script type="text/javascript">
+	
+	var load_more = true;
+	$(".spinner").hide();
 
 	$('.actions .like, .actions .dislike').click(function(e){
 		e.preventDefault();
 		$("#tinderslide").jTinder($(this).attr('class'));
 	});
+
+	$(".nav-btn").hover(function(){
+		$(this).addClass("active2");
+		}, function(){
+		$(this).removeClass("active2");	
+	});
+
+
 
 	$("#tinderslide > ul li").tsort({attr:"id"});
 
@@ -69,6 +91,7 @@
 	$(function(){
 		$('[data-toggle="tooltip"]').tooltip()
 	});
+
 </script>
 
 </body>
