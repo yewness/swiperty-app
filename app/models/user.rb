@@ -44,6 +44,17 @@ class User < ActiveRecord::Base
 			self.friendships.where(friend_id: user2).first.destroy
 		end
 	end
+
+	def self.gender(user)
+		case user.interest
+			when "Male"
+				where('gender = ?', 'male')
+			when "Female"
+				where('gender = ?', 'female')
+			else
+				all
+		end
+	end
 	
 	private
 	def self.process_uri(uri)
